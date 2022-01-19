@@ -24,4 +24,4 @@ def form_example():
                   <h1>The value is: {}</h1>'''.format(inputIP, inputDIN)
     return "No POST"
 if __name__ == '__main__':
-   app.run(host='localhost', port=8000, debug=True)
+   app.run(host='localhost', port=45654, debug=True)
