@@ -480,11 +480,17 @@
       <!--Section: Statistics with subtitles-->
       <h1>Configuración Gateway</h1>
       <section class="p-3">
-        <form id="form"class="row gy-2 gx-3 align-items-center">
-          <div class="row-auto">
+        <form id="form" class="row gy-2 gx-3 align-items-center">
+          <div class="row-auto" id="ipDiv" style="display: none;">
             <div class="form-outline">
-              <input type="text" id="inputIP" name="inputIP"class="form-control" />
+              <input type="text" id="inputIP" name="inputIP" class="form-control" />
               <label class="form-label" for="inputIP">IP Fija</label>
+            </div>
+          </div>
+          <div class="row-auto" id="pepDiv" style="display: none;">
+            <div class="form-outline">
+              <input type="text" id="inputIP" name="inputPEP" class="form-control" />
+              <label class="form-label" for="inputPEP">IP P.E.P</label>
             </div>
           </div>
           <div class="row-auto mt-4">
@@ -497,13 +503,13 @@
           </div>
           <div class="row-auto mt-4">
             <div class="form-outline">
-              <input type="text" id="inputSSID"  name="inputSSID"class="form-control" />
+              <input type="text" id="inputSSID" name="inputSSID" class="form-control" />
               <label class="form-label" for="inputSSID">WIFI - SSID</label>
             </div>
           </div>
           <div class="row-auto mt-4">
             <div class="form-outline">
-              <input type="text" id="inputPSWD"  name="inputPSWD" class="form-control" />
+              <input type="text" id="inputPSWD" name="inputPSWD" class="form-control" />
               <label class="form-label" for="inputPSWD"> WIFI - Password</label>
             </div>
           </div>
@@ -523,19 +529,30 @@
   <!-- Custom scripts -->
   <script type="text/javascript" src="js/admin.js"></script>
   <script>
+
     var state = true;
+
     $("#inputDIN").val(state);
     $(document).ready(function () {
       $("#btn").click(function () {
-        var data = [$('#inputIP').val(), $('#inputDIN').val(), $('#inputSSID').val(), $('#inputPSWD').val()];
-        console.log( $("#form").serialize())
-         //sendPet("POST", "middleware.php", JSON.stringify({ ip: data[0], din: data[1], ssid: data[2], pswd: data[3] }), "application/json");
-         //sendPet("POST", "middleware.php", $("#form").serialize(), "");
-          sendPet("POST", "/config", $("#form").serialize(), "");
+        //var data = [$('#inputIP').val(), $('#inputDIN').val(), $('#inputSSID').val(), $('#inputPSWD').val()]; 
+        console.log($("#form").serialize())
+        //sendPet("POST", "middleware.php", JSON.stringify({ ip: data[0], din: data[1], ssid: data[2], pswd: data[3] }), "application/json");
+        //sendPet("POST", "middleware.php", $("#form").serialize(), "");
+        sendPet("POST", "/config", $("#form").serialize(), "");
       });
       $("#inputDIN").click(function () {
         state = !state;
         $("#inputDIN").val(state);
+        if (!state) {
+          $("#pepDiv").show();
+          $("#ipDiv").show();
+        }
+        else {
+          $("#pepDiv").hide();
+          $("#ipDiv").hide();
+        }
+
         console.log(state)
       });
     });
@@ -545,9 +562,9 @@
         type: "post",             //"POST",
         url: url,                   //"http://...../",
         data: body                 //JSON.stringify({ name: "Pedro" }),
-       /* mode: 'no-cors',*/
+        /* mode: 'no-cors',*/
       }).done(function (data) {
-       console.log(data);          // imprimimos la respuesta
+        console.log(data);          // imprimimos la respuesta
       }).fail(function () {
         alert("Algo salió mal");
       });

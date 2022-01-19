@@ -148,7 +148,7 @@ interface eth0
 static domain_name_servers=8.8.8.8
 """
     return textDHCP
-def changeIp(ip, din, ssid, pswd):
+def changeIp(ip, din, inputPEP):
     #f = open('/etc/dhcpcd.conf', 'w')
     f = open('test.txt', 'w')
     print(din)
@@ -156,7 +156,7 @@ def changeIp(ip, din, ssid, pswd):
         print(True)
         f.write (getTextIpDHCP())
     else:
-        f.write (getTextIpNoChange(ip,"192.168.1.1"))
+        f.write (getTextIpNoChange(ip,inputPEP))
         print(False)
 
     #sudo nano /etc/dhcpcd.conf 

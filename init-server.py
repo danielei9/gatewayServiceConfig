@@ -16,8 +16,9 @@ def form_example():
         inputDIN = request.form.get('inputDIN')
         inputSSID = request.form.get('inputSSID')
         inputPSWD = request.form.get('inputPSWD')
+        inputPEP = request.form.get('inputPEP')
         print(inputIP)
-        cambiarIp.changeIp(inputIP, inputDIN, inputSSID, inputPSWD)
+        cambiarIp.changeIp(inputIP, inputDIN, inputPEP)
         return '''
                   <h1>The language value is: {}</h1>
                   <h1>The framework value is: {}</h1>'''.format(inputIP, inputDIN)
