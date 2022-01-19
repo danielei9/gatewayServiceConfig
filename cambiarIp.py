@@ -150,7 +150,7 @@ static domain_name_servers=8.8.8.8
     return textDHCP
 def changeIp(ip, din, inputPEP):
     #f = open('/etc/dhcpcd.conf', 'w')
-    f = open('test.txt', 'w')
+    f = open('/etc/dhcpcd.conf', 'w')
     print(din)
     if(din!=None):
         print(True)

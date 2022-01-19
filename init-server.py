@@ -20,8 +20,8 @@ def form_example():
         print(inputIP)
         cambiarIp.changeIp(inputIP, inputDIN, inputPEP)
         return '''
-                  <h1>The language value is: {}</h1>
-                  <h1>The framework value is: {}</h1>'''.format(inputIP, inputDIN)
-    return "No post"
+                  <h1>The value is: {}</h1>
+                  <h1>The value is: {}</h1>'''.format(inputIP, inputDIN)
+    return "No POST"
 if __name__ == '__main__':
    app.run(host='localhost', port=8000, debug=True)
