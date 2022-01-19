@@ -4,7 +4,6 @@
 
 import sys
 import os
-import requests
 import time
 def getTextIpNoChange(ip,ipgatewayInternet):
     textIpNoChange = """
