@@ -1,3 +1,8 @@
+
+crontab -e :
+  @reboot sleep 15;export DISPLAY=:0 && /opt/displayController.sh
+
+  
 # Admin Dashboard template for Bootstrap 5
 
 
