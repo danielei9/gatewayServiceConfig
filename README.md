@@ -1,6 +1,6 @@
 
 crontab -e :
-  @reboot sleep 15;export DISPLAY=:0 && /opt/displayController.sh
+  @reboot sudo /home/pi/gatewayServiceConfig/init-python.sh
 dar permisos de ejecucion 
 chmod +x /home/pi/gatewayServiceConfig/init-python.sh
   
