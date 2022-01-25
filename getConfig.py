@@ -7,9 +7,9 @@ def getConfig():
         return "DIN"
     # Si es statica
     else:
-        #f = open('test.txt', 'r')  # test
+        # f = open('test.txt', 'r')  # test
         f = open('/etc/dhcpcd.conf', 'r')
-       for line in f:
+        for line in f:
             if 'static ip_address' in line:
                 ip_adr = line.split('=')[1].split("\n")[0]
                 print(ip_adr)
