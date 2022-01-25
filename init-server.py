@@ -1,16 +1,25 @@
 from flask import Flask, render_template
 from flask import *
 import cambiarIp
+import getConfig
 app = Flask(__name__,
             static_folder='static',
             template_folder='templates')
+# #
+#Routes
+# #
 @app.route('/')
 def home():
     return render_template('index.html')
+
 # allow both GET and POST requests
 @app.route('/config', methods=['GET', 'POST'])
 def form_example():
     # handle the POST request
+    if request.method == 'GET':
+        var = getConfig.getConfig()
+        print(var)
+        return var
     if request.method == 'POST':
         inputIP = request.form.get('inputIP')
         inputDIN = request.form.get('inputDIN')
@@ -24,4 +33,4 @@ def form_example():
                   <h1>The value is: {}</h1>'''.format(inputIP, inputDIN)
     return "No POST"
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=35465, debug=True)
+   app.run(host='0.0.0.0', port=7777, debug=True)

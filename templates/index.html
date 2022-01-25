@@ -50,7 +50,7 @@
 
         <!-- Brand -->
         <a class="navbar-brand" href="#">
-          <img src="{{ url_for('static', filename='logo.PNG') }}" height="25" alt="" loading="lazy" />
+          <img src="{{ url_for('static', filename='logo.PNG') }}" height="50" alt="" loading="lazy" />
         </a>
         <!-- Search form -->
         <form class="d-none d-md-flex input-group w-auto my-auto">
@@ -60,7 +60,7 @@
         </form>
 
         <!-- Right links -->
-        <ul class="navbar-nav ms-auto d-flex flex-row">
+        <ul class="navbar-nav ms-auto d-flex flex-row" style="display: none !important;">
           <!-- Notification dropdown -->
           <li class="nav-item dropdown">
             <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
@@ -483,13 +483,13 @@
         <form id="form" class="row gy-2 gx-3 align-items-center">
           <div class="row-auto" id="ipDiv" style="display: none;">
             <div class="form-outline">
-              <input type="text" id="inputIP" name="inputIP" class="form-control" />
+              <input type="text" id="inputIP" name="inputIP" class="form-control" style="padding-left: 100px;"/>
               <label class="form-label" for="inputIP">IP Fija</label>
             </div>
           </div>
           <div class="row-auto" id="pepDiv" style="display: none;">
             <div class="form-outline">
-              <input type="text" id="inputIP" name="inputPEP" class="form-control" />
+              <input type="text" id="inputPEP" name="inputPEP" class="form-control"  style="padding-left: 100px;"/>
               <label class="form-label" for="inputPEP">IP P.E.P</label>
             </div>
           </div>
@@ -501,21 +501,22 @@
               </label>
             </div>
           </div>
-          <div class="row-auto mt-4">
+          <div class="row-auto mt-4" style="display: none;">
             <div class="form-outline">
-              <input type="text" id="inputSSID" name="inputSSID" class="form-control" />
+              <input type="text" id="inputSSID" name="inputSSID" class="form-control"  style="padding-left: 100px;"/>
               <label class="form-label" for="inputSSID">WIFI - SSID</label>
             </div>
           </div>
-          <div class="row-auto mt-4">
+          <div class="row-auto mt-4"style="display: none;">
             <div class="form-outline">
-              <input type="text" id="inputPSWD" name="inputPSWD" class="form-control" />
+              <input type="text" id="inputPSWD" name="inputPSWD" class="form-control"style="padding-left: 100px;" />
               <label class="form-label" for="inputPSWD"> WIFI - Password</label>
             </div>
           </div>
 
           <div class="row-auto mt-4">
             <button type="button" id="btn" class="btn btn-primary">Submit</button>
+            <p id="warningText"style="color:red">** Al hacer click se guardará la configuración y se reiniciará el gateway</p>
           </div>
         </form>
 
@@ -532,14 +533,50 @@
 
     var state = true;
 
-    $("#inputDIN").val(state);
     $(document).ready(function () {
+      /*
+       GET CONFIG 
+      */
+      $.ajax({
+        type: "get",
+        url: "/config",                   //"http://...../",
+        data: ""                 //JSON.stringify({ name: "Pedro" }),
+        /* mode: 'no-cors',*/
+      }).done(function (data) {
+        data = JSON.parse(data)
+        console.log(data)
+
+        if (data.state == "STAT") {
+          state = false;
+          $("#inputDIN").prop("checked", 0);
+          $("#inputDIN").val(state);
+          if (state == false) {
+            $("#inputIP").val(data.ip_adr);
+            $("#inputPEP").val(data.gatw);
+            $("#pepDiv").show();
+            $("#ipDiv").show();
+          }
+          else {
+            $("#pepDiv").hide();
+            $("#ipDiv").hide();
+          }
+        }
+        if (data.state == "DIN") {
+          $("#inputDIN").prop("checked", 1);
+
+          state = true;
+          $("#inputDIN").val(state);
+        }
+      })
+/**
+ * SUBMIT CLICK 
+*/
       $("#btn").click(function () {
         //var data = [$('#inputIP').val(), $('#inputDIN').val(), $('#inputSSID').val(), $('#inputPSWD').val()]; 
         console.log($("#form").serialize())
         //sendPet("POST", "middleware.php", JSON.stringify({ ip: data[0], din: data[1], ssid: data[2], pswd: data[3] }), "application/json");
         //sendPet("POST", "middleware.php", $("#form").serialize(), "");
-        sendPet("POST", "/config", $("#form").serialize(), "");
+        sendPet("post", "/config", $("#form").serialize(), "");
       });
       $("#inputDIN").click(function () {
         state = !state;
@@ -559,7 +596,7 @@
 
     function sendPet(method, url, body, contentType) {
       $.ajax({
-        type: "post",             //"POST",
+        type: method,             //"POST",
         url: url,                   //"http://...../",
         data: body                 //JSON.stringify({ name: "Pedro" }),
         /* mode: 'no-cors',*/
