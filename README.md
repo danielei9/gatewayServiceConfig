@@ -1,7 +1,8 @@
 
 crontab -e :
   @reboot sleep 15;export DISPLAY=:0 && /opt/displayController.sh
-
+dar permisos de ejecucion 
+chmod +x /home/pi/gatewayServiceConfig/init-python.sh
   
 # Admin Dashboard template for Bootstrap 5
 
