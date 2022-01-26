@@ -2,7 +2,7 @@
 def getSSID():
     #'/usr/local/rak/ap/Create_ap.conf'
     ssid_last = ""
-    file = open("/usr/local/rak/ap/Create_ap.conf", 'r')
+    file = open("/usr/local/rak/ap/create_ap.conf", 'r')
     lines = file.readlines()
     for l in lines:
         if("SSID" in l):
@@ -19,7 +19,7 @@ def getSSID():
 def getPSWD():
     #'/usr/local/rak/ap/Create_ap.conf'
     pswd_last = ""
-    file = open("/usr/local/rak/ap/Create_ap.conf", 'r')
+    file = open("/usr/local/rak/ap/create_ap.conf", 'r')
     lines = file.readlines()
     for l in lines:
         if("PASSPHRASE" in l):
