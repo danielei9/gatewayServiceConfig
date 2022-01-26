@@ -501,16 +501,16 @@
               </label>
             </div>
           </div>
-          <div class="row-auto mt-4" style="display: none;">
+          <div class="row-auto mt-4" style="">
             <div class="form-outline">
               <input type="text" id="inputSSID" name="inputSSID" class="form-control"  style="padding-left: 100px;"/>
-              <label class="form-label" for="inputSSID">WIFI - SSID</label>
+              <label class="form-label" for="inputSSID">AP-SSID</label>
             </div>
           </div>
-          <div class="row-auto mt-4"style="display: none;">
+          <div class="row-auto mt-4"style="">
             <div class="form-outline">
               <input type="text" id="inputPSWD" name="inputPSWD" class="form-control"style="padding-left: 100px;" />
-              <label class="form-label" for="inputPSWD"> WIFI - Password</label>
+              <label class="form-label" for="inputPSWD"> AP-Pass</label>
             </div>
           </div>
 
@@ -545,6 +545,8 @@
       }).done(function (data) {
         data = JSON.parse(data)
         console.log(data)
+        $("#inputSSID").val(data.ssid);
+        $("#inputPSWD").val(data.pswd);
 
         if (data.state == "STAT") {
           state = false;

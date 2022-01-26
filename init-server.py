@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask import *
 import cambiarIp
+import cambiarAp
 import getConfig
 app = Flask(__name__,
             static_folder='static',
@@ -28,9 +29,11 @@ def form_example():
         inputPEP = request.form.get('inputPEP')
         print(inputIP)
         cambiarIp.changeIp(inputIP, inputDIN, inputPEP)
+        cambiarAp.changeAp(inputSSID, inputPSWD)
         return '''
                   <h1>The value is: {}</h1>
                   <h1>The value is: {}</h1>'''.format(inputIP, inputDIN)
     return "No POST"
+
 if __name__ == '__main__':
    app.run(host='0.0.0.0', port=7777, debug=True)
