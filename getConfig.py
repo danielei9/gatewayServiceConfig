@@ -8,7 +8,7 @@ def getSSID():
         if("SSID" in l):
             print(l)
             print("l")
-            ssid_last = l.split('=')[1]
+            ssid_last = l.split('=')[1].split('\n')[0]
             return ssid_last
         else:
             ssid_last = ""
@@ -23,7 +23,7 @@ def getPSWD():
     lines = file.readlines()
     for l in lines:
         if("PASSPHRASE" in l):
-            pswd_last = l.split('=')[1]
+            pswd_last = l.split('=')[1].split('\n')[0]
             return pswd_last
         else:
             pswd_last = ""
@@ -33,8 +33,8 @@ def getPSWD():
 
 def getConfig():
     f = open('test.txt', 'r') #test
-    ssid = getSSID()[:-2]
-    pswd = getPSWD()[:-2]
+    ssid = getSSID()
+    pswd = getPSWD()
     #f = open('/etc/dhcpcd.conf', 'r')
     # Si es dinamica
     if("#static ip_address" in f.read()):
