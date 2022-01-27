@@ -156,7 +156,7 @@ def changeIp(ip, din, inputPEP):
 
     #sudo nano /etc/dhcpcd.conf 
     f.close()
-    os.system('sudo reboot')
+    #os.system('sudo reboot')
     #sudo /etc/init.d/networking restart
 
 
