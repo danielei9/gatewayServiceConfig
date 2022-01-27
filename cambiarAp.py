@@ -56,4 +56,4 @@ def changeAp(ssid, pswd):
     changePSWD(pswd)
     #os.system('sudo reboot')
 
-changeAp("ssid", "pswd")
+#changeAp("ssid", "pswd")
