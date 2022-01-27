@@ -603,9 +603,11 @@
         data: body                 //JSON.stringify({ name: "Pedro" }),
         /* mode: 'no-cors',*/
       }).done(function (data) {
+        if(data == "reboot"){
+          alert("Reiniciando Gateway");
+        }
         console.log(data);          // imprimimos la respuesta
       }).fail(function () {
-        alert("Algo salió mal");
       });
       /*.always(function () {
         alert("Siempre se ejecuta")

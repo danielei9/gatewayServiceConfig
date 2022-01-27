@@ -3,6 +3,8 @@ from flask import *
 import cambiarIp
 import cambiarAp
 import getConfig
+import os
+
 app = Flask(__name__,
             static_folder='static',
             template_folder='templates')
@@ -30,9 +32,8 @@ def form_example():
         print(inputIP)
         cambiarIp.changeIp(inputIP, inputDIN, inputPEP)
         cambiarAp.changeAp(inputSSID, inputPSWD)
-        return '''
-                  <h1>The value is: {}</h1>
-                  <h1>The value is: {}</h1>'''.format(inputIP, inputDIN)
+        os.system('sudo reboot')
+        return "reboot"
     return "No POST"
 
 if __name__ == '__main__':

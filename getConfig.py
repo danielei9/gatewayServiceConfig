@@ -32,17 +32,16 @@ def getPSWD():
     return pswd_last       
 
 def getConfig():
-    f = open('test.txt', 'r') #test
+    #f = open('test.txt', 'r') #test
     ssid = getSSID()
     pswd = getPSWD()
-    #f = open('/etc/dhcpcd.conf', 'r')
+    f = open('/etc/dhcpcd.conf', 'r')
     # Si es dinamica
     if("#static ip_address" in f.read()):
         return '{\n   "state": "DIN",\n   "ssid": "'+str(ssid)+'",\n   "pswd": "'+str(pswd)+'"\n}'
     # Si es statica
     else:
         # f = open('test.txt', 'r')  # test
-        f = open('/etc/dhcpcd.conf', 'r')
         for line in f:
             if 'static ip_address' in line:
                 ip_adr = line.split('=')[1].split("\n")[0]
