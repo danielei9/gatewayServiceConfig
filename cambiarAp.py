@@ -23,7 +23,8 @@ def changeSSID(ssid):
                 txtFile.append(lineSSID)
             else:
                 txtFile.append(l)
-        file.close()       
+        file.close() 
+        #file = open("test_ap.txt", 'w')
         file = open("/usr/local/rak/ap/create_ap.conf", 'w')
         file.writelines(txtFile)
         file.close()
@@ -46,6 +47,7 @@ def changePSWD(pswd):
             else:
                 txtFile.append(l)
         file.close()       
+        #file = open("test_ap.txt", 'w')
         file = open("/usr/local/rak/ap/create_ap.conf", 'w')
         file.writelines(txtFile)
         file.close()

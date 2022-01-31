@@ -1,7 +1,8 @@
 
 def getSSID():
-    #'/usr/local/rak/ap/Create_ap.conf'
+    # '/usr/local/rak/ap/Create_ap.conf'
     ssid_last = ""
+    #file = open("test_ap.txt", 'r')
     file = open("/usr/local/rak/ap/create_ap.conf", 'r')
     lines = file.readlines()
     for l in lines:
@@ -16,9 +17,11 @@ def getSSID():
     print(ssid_last)
     return ssid_last
 
+
 def getPSWD():
-    #'/usr/local/rak/ap/Create_ap.conf'
+    # '/usr/local/rak/ap/Create_ap.conf'
     pswd_last = ""
+    #file = open("test_ap.txt", 'r')
     file = open("/usr/local/rak/ap/create_ap.conf", 'r')
     lines = file.readlines()
     for l in lines:
@@ -29,27 +32,28 @@ def getPSWD():
             pswd_last = ""
     file.close()
     print(pswd_last)
-    return pswd_last       
+    return pswd_last
+
 
 def getConfig():
-    #f = open('test.txt', 'r') #test
+    f = open('/etc/dhcpcd.conf', 'r')
+    #f = open('test.txt', 'r')  # test
+    lines = f.readlines()
     ssid = getSSID()
     pswd = getPSWD()
-    f = open('/etc/dhcpcd.conf', 'r')
-    # Si es dinamica
-    if("#static ip_address" in f.read()):
-        return '{\n   "state": "DIN",\n   "ssid": "'+str(ssid)+'",\n   "pswd": "'+str(pswd)+'"\n}'
-    # Si es statica
-    else:
-        # f = open('test.txt', 'r')  # test
-        for line in f:
-            if 'static ip_address' in line:
-                ip_adr = line.split('=')[1].split("\n")[0]
-                print(ip_adr)
-            if 'static routers=' in line:
-                gatw = line.split('=')[1].split("\n")[0]
-                print(gatw)
-    
-    return '{\n   "state": "STAT",\n   "ip_adr": "' + ip_adr +'",\n   "gatw": "'+ gatw + '",\n   "ssid": "'+str(ssid)+'",\n   "pswd": "'+str(pswd)+'"\n}'
+    for line in lines:
+        # Si es statica
+        if '#static ip_address' in line:
+            return '{\n   "state": "DIN",\n   "ssid": "'+str(ssid)+'",\n   "pswd": "'+str(pswd)+'"\n}'
+        # Si es dinamica
+        if "static ip_address" in line:
+            ip_adr = line.split('=')[1].split("\n")[0]
+            print(ip_adr)
+        if 'static routers=' in line:
+            gatw = line.split('=')[1].split("\n")[0]
+            print(gatw)
+    f.close()
+    return '{\n   "state": "STAT",\n   "ip_adr": "' + ip_adr + '",\n   "gatw": "' + gatw + '",\n   "ssid": "'+str(ssid)+'",\n   "pswd": "'+str(pswd)+'"\n}'
+
 
 print(getConfig())
