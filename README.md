@@ -37,11 +37,10 @@ o haciendo reboot y luego curl localhost:7777
 
 Apuntes : resumen
 --------------------------------
-Actualizar e instal pip3 
+Actualizar e instalar pip3 
 instalar flask
 crontab -e :
-@reboot sudo ./home/pi/gatewayServiceConfig/init-python.sh  > /tmp/port_7777.log 2>&1
-@reboot cd /home/pi/gatewayServiceConfig && /usr/bin/python3 init-server.py > /tmp/server_7777.log 2>&1
+@reboot sudo /home/pi/gatewayServiceConfig/init-python.sh > /tmp/port_7777.log 2>&1
 dar permisos de ejecucion 
 chmod +x /home/pi/gatewayServiceConfig/init-python.sh
 chmod +x /home/pi/gatewayServiceConfig/init-server.py 
