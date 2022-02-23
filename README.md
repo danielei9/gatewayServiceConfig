@@ -20,8 +20,7 @@ Hacer git clone de este repositorio en /home/pi/
 Entrar en crontab -e mediante una terminal, y escribir dentro del archivo (sin comillas): 
 
 "
-@reboot sudo ./home/pi/gatewayServiceConfig/init-python.sh  > /tmp/port_7777.log 2>&1
-@reboot cd /home/pi/gatewayServiceConfig && /usr/bin/python3 init-server.py > /tmp/server_7777.log 2>&1
+@reboot sudo /home/pi/gatewayServiceConfig/init-python.sh > /tmp/port_7777.log 2>&1
 "
 
 dar permisos de ejecucion mediante terminal con: 
