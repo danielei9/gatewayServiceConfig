@@ -14,6 +14,7 @@ Despues ejecutamos:
 - pip3 install paho-mqtt python-etcd 
 - pip3 install psutil
 - pip3 install flask
+En caso de error NotModuleFoundError al iniciar, porbar a instalar los modulos anteriores con la palabra sudo delante de pip3
 
 // PARAMETROS DE INSTALACION DEL SERVICIO //
 Hacer git clone de este repositorio en /home/pi/
